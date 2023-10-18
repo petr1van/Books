@@ -1,0 +1,228 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: left;
+    padding: 30px 0;
+    background-color: #4285f4;
+    color: #ffffff;
+    margin: 0;
+}
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+input[type="text"], input[type="number"], select {
+    padding: 12px;
+    margin: 8px;
+    width: 450px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+}
+button {
+    padding: 12px 24px;
+    margin: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4285f4;
+    color: #ffffff;
+    cursor: pointer;
+}
+#book-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+}
+.book {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+}
+.book img {
+    width: 150px;
+    height: 200px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.description {
+    height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #555555;
+}
+.full-description {
+    display: none;
+    margin-top: 15px;
+    color: #555555;
+}
+.show-more-button {
+    cursor: pointer;
+    color: #4285f4;
+}
+footer {
+    text-align: center;
+    background-color: #4285f4;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+}
+.drop {
+    position: absolute;
+    background-color: blue;
+    height: 0;
+    overflow: hidden;
+    width: 100px;
+    transition: .5s;
+  }
+  .drop p {
+    text-align: center;
+    color: white;
+    margin-top: 35px;
+  }
+  button:hover ~ .drop {
+    height: 100px;
+  }
+  /* Стили модального окна */
+.modal-header h2 {
+    color: #555;  
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1;    
+    margin: 0;
+}
+/* кнопка закрытия окна */
+.modal .btn-close {
+    color: #aaa;
+    cursor: pointer;
+    font-size: 30px;
+    text-decoration: none;
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+.modal .btn-close:hover {
+    color: red;
+}
+/* слой затемнения */
+.modal-wrap:before {
+    content: "";
+    display: none;
+    background: rgba(0, 0, 0, .3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+}
+.modal-overlay {
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 102;
+}
+/* активация слоя затемнения и модального блока */
+.modal-open:checked ~ .modal-wrap:before,
+.modal-open:checked ~ .modal-wrap .modal-overlay {
+    display: block;
+}
+.modal-open:checked ~ .modal-wrap .modal-dialog {
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: 20%;
+}
+/* элементы модального окна */
+.modal-dialog {
+    background: #fefefe;
+    border: none;
+    border-radius: 5px;
+    position: fixed;
+    width: 80%;
+    max-width: 500px;
+    left: 50%;
+    top: -100%;
+    -webkit-box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+    -moz-box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+    box-shadow: 0 15px 20px rgba(0,0,0,.22),0 19px 60px rgba(0,0,0,.3);
+    -webkit-transform: translate(-50%, -500%);
+    -ms-transform: translate(-50%, -500%);
+    -o-transform: translate(-50%, -500%);
+    transform: translate(-50%, -500%);
+    -webkit-transition: -webkit-transform 0.4s ease-out;
+    -moz-transition: -moz-transform 0.4s ease-out;
+    -o-transition: -o-transform 0.4s ease-out;
+    transition: transform 0.4s ease-out;
+    z-index: 103;
+}
+.modal-body {
+  padding: 20px;
+}
+.modal-body p {
+    margin: 0;
+}
+.modal-header,
+.modal-footer {
+    padding: 20px 20px;
+}
+.modal-header {
+    border-bottom: #eaeaea solid 1px;
+}
+.modal-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+.modal-footer {
+    border-top: #eaeaea solid 1px;
+    text-align: right;
+}
+/* адаптивные картинки в модальном блоке */
+.modal-body img { 
+    max-width: 100%;
+    height: auto;
+}
+/* кнопки */
+.btn {
+    background: #fff;
+    border: #555 solid 1px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    padding: 8px 15px;
+    text-decoration: none;
+    text-align: center;
+    min-width: 60px;
+    position: relative;
+}
+.btn:hover, .btn:focus {
+    background: #f2f2f2;
+}
+.btn-primary {
+    background: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+}
+.btn-primary:hover{
+    background: #66A1D3;
+}

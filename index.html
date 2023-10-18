@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Каталог книг</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Library</h1>
+    
+
+    <!-- Кнопка активации -->
+<label class="btn" for="modal-1">Каталог</label>
+<!-- Модальное окно -->
+<div class="modal">
+  <input class="modal-open" id="modal-1" type="checkbox" hidden>
+  <div class="modal-wrap" aria-hidden="true" role="dialog">
+    <label class="modal-overlay" for="modal-1"></label>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>Заголовок </h2>
+        <label class="btn-close" for="modal-1" aria-hidden="true">×</label>
+      </div>
+      <div class="modal-body">
+        <p>Здесь размещаете любое содержание...</p>
+      </div>
+      <div class="modal-footer">
+        <label class="btn btn-primary" for="modal-1">Отлично!</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <form id="bookForm">
+        <input type="text" id="searchInput" placeholder="Поиск книг">
+        <select id="genreFilter">
+            <option value="all">Все жанры</option>
+            <option value="fiction">Художественная литература</option>
+            <option value="fantasy">Фэнтези</option>
+            <option value="thriller">Триллер</option>
+            <option value="romance">Роман</option>
+            <option value="scientific">Научная</option>
+            <!-- Добавьте другие жанры по вашему усмотрению -->
+        </select>
+        <input type="text" id="authorFilter" placeholder="Фильтр по автору">
+        <button type="submit"><img src="pictures\icons8-поиск-50.png" alt=""></button>
+    
+
+    </form>
+
+    <div id="book-list">
+        <!-- Результаты поиска будут здесь -->
+    </div>
+
+    <footer>
+        <p>© 2023 Ваше Имя</p>
+    </footer>
+
+    <script>
+        
+        document.getElementById('bookForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value;
+            const genreFilter = document.getElementById('genreFilter').value;
+            const authorFilter = document.getElementById('authorFilter').value;
+            let url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`;
+            if (genreFilter !== 'all') {
+                url += `+subject:${genreFilter}`;
+            }
+            if (authorFilter) {
+                url += `+inauthor:${authorFilter}`;
+            }
+            const API_KEY = 'AIzaSyARNmCfqcGzkzTcDA-UCUqfLMo8G5Ia1yI';
+            url += `&key=${API_KEY}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const bookList = document.getElementById('book-list');
+                    bookList.innerHTML = ''; // Очистка предыдущих результатов поиска
+
+                    data.items.forEach(item => {
+                        const book = item.volumeInfo;
+                        const title = book.title;
+                        const authors = book.authors ? book.authors.join(', ') : 'Автор неизвестен';
+                        const description = book.description ? book.description : 'Нет описания доступного';
+                        const thumbnail = book.imageLinks ? book.imageLinks.thumbnail : imageLinks="pictures/empty.png";
+
+                        
+                    
+
+                        const bookElement = document.createElement('div');
+                        bookElement.classList.add('book');
+                        bookElement.innerHTML = `
+                            <img src="${thumbnail}" alt="${title}">
+                            <h3>${title}</h3>
+                            <p>Автор: ${authors}</p>
+                            <p>${description}</p>
+                        `;
+                        bookList.appendChild(bookElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка получения данных', error);
+                });
+        });
+    </script>
+</body>
+</html>
