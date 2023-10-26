@@ -1,55 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог книг</title>
+    <link rel="icon" type="image/png" href="pictures\icons8-открытая-книга-60.png"> <!-- Укажите путь к вашей иконке -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        
-    </style>
 </head>
 <body>
-    <h1>Library</h1>
     
-
-    <!-- Кнопка активации -->
-<label class="btn" for="modal-1">Каталог</label>
-<!-- Модальное окно -->
-<div class="modal">
-  <input class="modal-open" id="modal-1" type="checkbox" hidden>
-  <div class="modal-wrap" aria-hidden="true" role="dialog">
-    <label class="modal-overlay" for="modal-1"></label>
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h2>Заголовок </h2>
-        <label class="btn-close" for="modal-1" aria-hidden="true">×</label>
-      </div>
-      <div class="modal-body">
-        <p>Здесь размещаете любое содержание...</p>
-      </div>
-      <div class="modal-footer">
-        <label class="btn btn-primary" for="modal-1">Отлично!</label>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-    <form id="bookForm">
-        <input type="text" id="searchInput" placeholder="Поиск книг">
-        <select id="genreFilter">
-            <option value="all">Все жанры</option>
-            <option value="fiction">Художественная литература</option>
-            <option value="fantasy">Фэнтези</option>
-            <option value="thriller">Триллер</option>
-            <option value="romance">Роман</option>
-            <option value="scientific">Научная</option>
-            <!-- Добавьте другие жанры по вашему усмотрению -->
-        </select>
-        <input type="text" id="authorFilter" placeholder="Фильтр по автору">
-        <button type="submit"><img src="pictures\icons8-поиск-50.png" alt=""></button>
+    <h1>
+        <img src="pictures\icons8-открытая-книга-60.png">Library
+        <form id="bookForm">
+            
+            <input type="text" id="searchInput" placeholder="Поиск книг">
+            <button type="submit"><aria-label="Поиск">&#128269;</button>
+            <select id="genreFilter">
+                <option value="all">Все жанры</option>
+                <option value="fiction">Художественная литература</option>
+                <option value="fantasy">Фэнтези</option>
+                <option value="thriller">Триллер</option>
+                <option value="romance">Роман</option>
+                <option value="scientific">Научная</option>
+                <!-- Добавьте другие жанры по вашему усмотрению -->
+            </select>
+            
+    </h1>
     
-
     </form>
 
     <div id="book-list">
@@ -57,7 +35,12 @@
     </div>
 
     <footer>
-        <p>© 2023 Ваше Имя</p>
+        <p>© 2023 Пётр
+            <a href="https://github.com/petr1van" target="_blank">
+                <img class="social-icon" src="pictures\icons8-github-50.png" alt="github">
+                
+            </a>
+        </p>
     </footer>
 
     <script>
@@ -66,14 +49,12 @@
             event.preventDefault();
             const searchTerm = document.getElementById('searchInput').value;
             const genreFilter = document.getElementById('genreFilter').value;
-            const authorFilter = document.getElementById('authorFilter').value;
             let url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`;
             if (genreFilter !== 'all') {
                 url += `+subject:${genreFilter}`;
             }
-            if (authorFilter) {
-                url += `+inauthor:${authorFilter}`;
-            }
+        
+            
             const API_KEY = 'AIzaSyARNmCfqcGzkzTcDA-UCUqfLMo8G5Ia1yI';
             url += `&key=${API_KEY}`;
 
